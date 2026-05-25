@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-from main import get_db
 from fastapi import HTTPException,status,Depends
 from fastapi.responses import JSONResponse
 from Model import model,database
@@ -9,7 +8,7 @@ from sqlalchemy import and_
 from hashing import Hash
 from sqlalchemy.orm import Session
 
-get_db = database.get_db()
+get_db = database.get_db
 
 router = APIRouter()
 

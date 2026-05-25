@@ -1,5 +1,7 @@
-from Model import model,database
+from Model import model
 from hashing import Hash
+
+
 
 default_risks = [
     {
@@ -93,7 +95,7 @@ default_users = [
     }
 ]
 
-def addALL():
+def addALL(db):
     for user in default_users:
         new_user = model.User(
             user_name = user["user_name"],
@@ -101,9 +103,9 @@ def addALL():
             user_email = user["user_email"],
             user_password = Hash.bcryptPassword(user["user_password"])
         )
-        database.session.add(new_user)
-        database.session.commit()
-        database.session.refresh(new_user)
+        db.add(new_user)
+        db.commit()
+        db.refresh(new_user)
 
     for risk in default_risks:
         new_risk = model.Risk(
@@ -113,6 +115,6 @@ def addALL():
             user_id = risk["user_id"],
             risk_type = risk["risk_type"]
         )
-        database.session.add(new_risk)
-        database.session.commit()
-        database.session.refresh(new_risk)
+        db.add(new_risk)
+        db.commit()
+        db.refresh(new_risk)

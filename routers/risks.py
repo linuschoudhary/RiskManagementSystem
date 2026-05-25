@@ -7,7 +7,7 @@ from typing import List
 from sqlalchemy import and_
 from sqlalchemy.orm import Session
 
-get_db = database.get_db()
+get_db = database.get_db
 
 router = APIRouter()
 

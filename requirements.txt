@@ -1,3 +1,5 @@
 fastapi
 pydentic
 uvicorn
+bcrypt
+passlib

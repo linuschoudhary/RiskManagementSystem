@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from Model import model,database
 from Schema import schema
 import default
-from routers import risks,users
+from routers import risks,users,authenticate
 from Model.database import get_db
 from sqlalchemy.orm import Session
 
@@ -11,9 +11,6 @@ app = FastAPI()
 
 model.Base.metadata.create_all(database.engine)
 
-
-
-    
 # Introduction
 @app.get("/",tags=['Introduction'])
 def Intro():
@@ -37,6 +34,6 @@ def addDefault(db: Session = Depends(get_db)):
         content= "Default Values added successfully for test purpose."
     )
 
-
+app.include_router(authenticate.router)
 app.include_router(risks.router)
 app.include_router(users.router)

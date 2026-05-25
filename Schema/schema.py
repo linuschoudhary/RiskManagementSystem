@@ -63,3 +63,14 @@ class UserOutputUpdated(BaseModel):
     user_email: str
 
     model_config = {"from_attributes": True}
+
+class Login(BaseModel):
+    user_email:str
+    password:str
+
+class Token(BaseModel):
+    access_token : str
+    token_data : str = "bearer"
+
+class TokenData(BaseModel):
+    user_email : str | None = None

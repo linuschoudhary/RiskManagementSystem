@@ -67,3 +67,6 @@ def delete_user(db:Session,user_id):
     db.delete(user)
     db.commit()
     return JSONResponse(status_code=status.HTTP_200_OK,content={"Message": "Deleted Successfully","User ID": user_id})
+
+def risks_assigned(db: Session,user_id):
+    user = db.query(model.User).filter(model.User.user_id == user_id).first()

@@ -8,6 +8,7 @@ from sqlalchemy import and_
 from hashing import Hash
 from sqlalchemy.orm import Session
 from Repository import users
+from oauth2 import get_current_user
 
 
 
@@ -20,7 +21,7 @@ router = APIRouter(
 
 # Users
 @router.get("/",response_model=List[schema.UserOutput])
-def showUser(db: Session = Depends(get_db)):
+def showUser(db: Session = Depends(get_db),current_user : schema.User = Depends(get_current_user)):
     return users.all_users(db)
 
 @router.get("/{user_id}")

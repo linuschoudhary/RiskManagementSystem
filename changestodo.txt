@@ -1,0 +1,1 @@
+1) When Updating password for user, hashing is not applied.

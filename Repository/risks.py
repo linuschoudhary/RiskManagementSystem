@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from fastapi.responses import JSONResponse
 
 
+
 def get_all(db:Session):
     try:
         risks =db.query(model.Risk).all()
@@ -13,16 +14,33 @@ def get_all(db:Session):
         for risk in risks:
             result.append({
                 "risk_id":risk.risk_id,
+                "risk_title": risk.risk_title,
                 "risk_description" : risk.risk_description,
                 "risk_priority" : risk.risk_priority,
                 "risk_status" : risk.risk_status,
-                "risk_allocation" : {
-                    "user_id" : risk.user_id,
+                "risk_type" : risk.risk_type,
+                "created_by" : {
+                    "user_id" : risk.created_by,
                     "user_name" : risk.user.user_name,
                     "user_role" : risk.user.user_role,
                     "user_email": risk.user.user_email
                 },
-                "risk_type" : risk.risk_type
+                "risk_allocation" : {
+                    "user_id" : risk.risk_allocation,
+                    "user_name" : risk.user.user_name,
+                    "user_role" : risk.user.user_role,
+                    "user_email": risk.user.user_email
+                },
+                "assigned_to" : {
+                    "user_id" : risk.assigned_to,
+                    "user_name" : risk.user.user_name,
+                    "user_role" : risk.user.user_role,
+                    "user_email": risk.user.user_email
+                },
+                "risk_category": risk.risk_category,
+                "due_date": risk.due_date
+                
+
             })
 
         return result
@@ -35,26 +53,52 @@ def get_risks_by_id(db:Session,risk_id:int):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Risk ID Not Found.")
     result = {
         "risk_id":risk.risk_id,
+        "risk_title": risk.risk_title,
         "risk_description" : risk.risk_description,
         "risk_priority" : risk.risk_priority,
         "risk_status" : risk.risk_status,
-        "risk_allocation" : {
-            "user_id" : risk.user_id,
+        "risk_type" : risk.risk_type,
+        "created_by" : {
+            "user_id" : risk.created_by,
             "user_name" : risk.user.user_name,
-            "user_role" : risk.user.user_role
+            "user_role" : risk.user.user_role,
+            "user_email": risk.user.user_email
         },
-        "risk_type" : risk.risk_type
+        "risk_allocation" : {
+            "user_id" : risk.risk_allocation,
+            "user_name" : risk.user.user_name,
+            "user_role" : risk.user.user_role,
+            "user_email": risk.user.user_email
+        },
+        "assigned_to" : {
+            "user_id" : risk.assigned_to,
+            "user_name" : risk.user.user_name,
+            "user_role" : risk.user.user_role,
+            "user_email": risk.user.user_email
+        },
+        "risk_category": risk.risk_category,
+        "due_date": risk.due_date
     }
+
     return result
+
+
+
+
 
 def add_risks(db:Session,details):
     try:
         new_risk = model.Risk(
+            risk_title = details.risk_title,
             risk_description = details.risk_description,
             risk_priority = details.risk_priority,
             risk_status = details.risk_status,
-            user_id = details.user_id,
-            risk_type = details.risk_type
+            risk_type = details.risk_type,
+            risk_category = details.risk_category,
+            created_by = details.created_by,
+            risk_allocation = details.risk_allocation,
+            assigned_to = details.assigned_to,
+            due_date = details.due_date
         )
         db.add(new_risk)
         db.commit()

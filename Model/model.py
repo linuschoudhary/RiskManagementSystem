@@ -19,11 +19,18 @@ class Risk(Base):
     __tablename__ = "risks"
 
     risk_id = Column(Integer, primary_key=True)
+    risk_title = Column(String)
     risk_description = Column(String)
     risk_priority = Column(String)
     risk_status = Column(String)
-    user_id = Column(Integer, ForeignKey("users.user_id"))
     risk_type = Column(String)
-
+    risk_category = Column(String)
+    created_by = Column(Integer)
+    risk_allocation = Column(Integer)
+    assigned_to = Column(Integer, ForeignKey("users.user_id"))
+    due_date = Column(String)
 
     user = relationship("User", back_populates= "risks")
+
+
+

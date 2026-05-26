@@ -14,19 +14,28 @@ class UserUpdate(BaseModel):
     user_password : Optional[str] = None
 
 class Risk(BaseModel):
+    risk_title : Optional[str] = None
     risk_description : str
     risk_priority : str
     risk_status : str
-    user_id : int
-    risk_type: str
+    risk_type :str
+    risk_category : str
+    created_by : int
+    risk_allocation : int
+    assigned_to : int
+    due_date : str
 
 class RiskUpdate(BaseModel):
+    risk_title : Optional[str] = None
     risk_description : Optional[str] = None
     risk_priority : Optional[str] = None
     risk_status : Optional[str] = None
-    user_id : Optional[int] = None
     risk_type: Optional[str] = None
-
+    risk_category : Optional[str] = None
+    created_by : Optional[int] = None
+    risk_allocation : Optional[int] = None
+    assigned_to : Optional[int] = None
+    due_date : Optional[str] = None
 
 class UserOutput(BaseModel):
     user_id : int
@@ -38,21 +47,34 @@ class UserOutput(BaseModel):
 
 class RiskOutput(BaseModel):
     risk_id : int
+    risk_title : str 
     risk_description : str
-    risk_priority: str
-    risk_status : str
+    risk_priority : str 
+    risk_status : str 
+    risk_type: str 
+    risk_category : str 
+    created_by : UserOutput
     risk_allocation : UserOutput
-    risk_type : str
+    assigned_to : UserOutput
+    due_date : str 
+    
+
     model_config = {"from_attributes": True}
 
 class RiskOutputUpdated(BaseModel):
     update_result : str
     risk_id : int
+    risk_title : str
     risk_description : str
-    risk_priority: str
-    risk_status : str
+    risk_priority : str 
+    risk_status : str 
+    risk_type: str 
+    risk_category : str 
+    created_by : UserOutput
     risk_allocation : UserOutput
-    risk_type : str
+    assigned_to : UserOutput
+    due_date : str 
+    
     model_config = {"from_attributes": True}
 
 class UserOutputUpdated(BaseModel):

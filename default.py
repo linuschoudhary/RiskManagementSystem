@@ -5,60 +5,100 @@ from hashing import Hash
 
 default_risks = [
     {
-        "risk_description": "Unauthorized access to admin dashboard",
+        "risk_title": "Admin Panel Unauthorized Access Attempt",
+        "risk_description": "Multiple failed login attempts detected on admin dashboard.",
         "risk_priority": "High",
         "risk_status": "Open",
-        "user_id": 1,
-        "risk_type": "Security"
+        "risk_type": "Security",
+        "risk_category": "Authentication",
+        "assigned_to": 1,   # Employee
+        "created_by": 5,    # Admin
+        "risk_allocation": 2,  # Manager (Mohit Solanki)
+        "due_date": "2026-06-10"
     },
     {
-        "risk_description": "Database backup failure",
+        "risk_title": "Backup System Failure Risk",
+        "risk_description": "Automated database backup failed due to storage limits.",
         "risk_priority": "Critical",
         "risk_status": "In Progress",
-        "user_id": 2,
-        "risk_type": "Infrastructure"
+        "risk_type": "Infrastructure",
+        "risk_category": "Database",
+        "assigned_to": 7,   # Piyush Chauhan (Employee)
+        "created_by": 6,    # Admin (Sunil)
+        "risk_allocation": 3,  # Manager (Sanya)
+        "due_date": "2026-06-05"
     },
     {
-        "risk_description": "Delayed software deployment",
+        "risk_title": "Delayed Feature Deployment",
+        "risk_description": "Production release delayed due to unresolved merge conflicts.",
         "risk_priority": "Medium",
         "risk_status": "Open",
-        "user_id": 3,
-        "risk_type": "Operational"
+        "risk_type": "Operational",
+        "risk_category": "CI/CD",
+        "assigned_to": 8,   # Mohit Malviya (Employee)
+        "created_by": 5,
+        "risk_allocation": 2,
+        "due_date": "2026-06-15"
     },
     {
-        "risk_description": "Sensitive customer data leakage",
+        "risk_title": "Customer Data Exposure Vulnerability",
+        "risk_description": "Potential leakage of sensitive user data via API endpoint.",
         "risk_priority": "Critical",
         "risk_status": "Mitigated",
-        "user_id": 4,
-        "risk_type": "Compliance"
+        "risk_type": "Compliance",
+        "risk_category": "Data Security",
+        "assigned_to": 3,   # Sanya (Employee role ignored logically, but ok for seed)
+        "created_by": 6,
+        "risk_allocation": 3,
+        "due_date": "2026-06-01"
     },
     {
-        "risk_description": "Server downtime during peak traffic",
+        "risk_title": "Server Overload During Peak Traffic",
+        "risk_description": "High CPU usage detected during peak hours causing latency.",
         "risk_priority": "High",
         "risk_status": "Monitoring",
-        "user_id": 5,
-        "risk_type": "Infrastructure"
+        "risk_type": "Infrastructure",
+        "risk_category": "Scalability",
+        "assigned_to": 4,
+        "created_by": 2,
+        "risk_allocation": 2,
+        "due_date": "2026-06-20"
     },
     {
-        "risk_description": "Third-party API outage",
+        "risk_title": "Third-Party API Downtime",
+        "risk_description": "External payment API intermittently unavailable.",
         "risk_priority": "Medium",
         "risk_status": "Open",
-        "user_id": 2,
-        "risk_type": "External"
+        "risk_type": "External",
+        "risk_category": "Dependency",
+        "assigned_to": 7,
+        "created_by": 1,
+        "risk_allocation": 3,
+        "due_date": "2026-06-25"
     },
     {
-        "risk_description": "Phishing attack targeting employees",
+        "risk_title": "Phishing Attack on Employees",
+        "risk_description": "Suspicious emails detected targeting staff credentials.",
         "risk_priority": "High",
         "risk_status": "In Progress",
-        "user_id": 1,
-        "risk_type": "Security"
+        "risk_type": "Security",
+        "risk_category": "Social Engineering",
+        "assigned_to": 8,
+        "created_by": 5,
+        "risk_allocation": 2,
+        "due_date": "2026-06-08"
     },
     {
-        "risk_description": "Failure in payment gateway integration",
+        "risk_title": "Payment Gateway Integration Failure",
+        "risk_description": "Transaction failures occurring in checkout process.",
         "risk_priority": "High",
         "risk_status": "Open",
-        "user_id": 3,
-        "risk_type": "Operational"
+        "risk_type": "Operational",
+        "risk_category": "Payments",
+        "assigned_to": 1,
+        "created_by": 6,
+        "risk_allocation": 3,
+        "due_date": "2026-06-18"
     }
 ]
 
@@ -77,7 +117,7 @@ default_users = [
     },
     {
         "user_name": "Sanya Singh Deora",
-        "user_role": "Employee",
+        "user_role": "Manager",
         "user_email": "sanya@gmail.com",
         "user_password": "sanya"
     },
@@ -98,6 +138,18 @@ default_users = [
         "user_role": "Admin",
         "user_email": "sunil@gmail.com",
         "user_password": "sunil123"
+    },
+    {
+        "user_name": "Piyush Chauhan",
+        "user_role": "Employee",
+        "user_email": "piyush@gmail.com",
+        "user_password": "piyush123"
+    },
+    {
+        "user_name": "Mohit Malviya",
+        "user_role": "Employee",
+        "user_email": "mohitmalviya@gmail.com",
+        "user_password": "mohit123"
     }
 ]
 
@@ -115,12 +167,18 @@ def addALL(db):
 
     for risk in default_risks:
         new_risk = model.Risk(
-            risk_description = risk["risk_description"],
-            risk_priority = risk["risk_priority"],
-            risk_status = risk["risk_status"],
-            user_id = risk["user_id"],
-            risk_type = risk["risk_type"]
+            risk_title= risk["risk_title"],
+            risk_description= risk["risk_description"],
+            risk_priority= risk["risk_priority"],
+            risk_status= risk['risk_status'],
+            risk_type= risk["risk_type"],
+            risk_category= risk['risk_category'],
+            created_by= risk['created_by'],
+            risk_allocation= risk['risk_allocation'],
+            assigned_to= risk['assigned_to'],
+            due_date = risk['due_date']
         )
+
         db.add(new_risk)
         db.commit()
         db.refresh(new_risk)

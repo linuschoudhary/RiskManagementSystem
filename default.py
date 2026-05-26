@@ -64,34 +64,40 @@ default_risks = [
 
 default_users = [
     {
-        "user_name": "Aarav Sharma",
+        "user_name": "Dipesh Soni",
+        "user_role": "Employee",
+        "user_email": "dipesh@gmail.com",
+        "user_password": "dipesh123"
+    },
+    {
+        "user_name": "Mohit Solanki",
+        "user_role": "Manager",
+        "user_email": "mohit@gmail.com",
+        "user_password": "mohit123"
+    },
+    {
+        "user_name": "Sanya Singh Deora",
+        "user_role": "Employee",
+        "user_email": "sanya@gmail.com",
+        "user_password": "sanya"
+    },
+    {
+        "user_name": "Priyanjali Bhati",
+        "user_role": "Employee",
+        "user_email": "priyanjali@gmail.com",
+        "user_password": "priyanjali123"
+    },
+    {
+        "user_name": "Prateeksha Khichi",
         "user_role": "Admin",
-        "user_email": "admin@riskmanagement.com",
-        "user_password": "admin123"
+        "user_email": "prateeksha@gmail.com",
+        "user_password": "prateeksha123"
     },
     {
-        "user_name": "Priya Mehta",
-        "user_role": "Risk Analyst",
-        "user_email": "priya@riskmanagement.com",
-        "user_password": "priya123"
-    },
-    {
-        "user_name": "Rohan Verma",
-        "user_role": "Security Officer",
-        "user_email": "rohan@riskmanagement.com",
-        "user_password": "rohan123"
-    },
-    {
-        "user_name": "Neha Singh",
-        "user_role": "Compliance Manager",
-        "user_email": "neha@riskmanagement.com",
-        "user_password": "neha123"
-    },
-    {
-        "user_name": "Vikram Patel",
-        "user_role": "DevOps Engineer",
-        "user_email": "vikram@riskmanagement.com",
-        "user_password": "vikram123"
+        "user_name": "Sunil Choudhary",
+        "user_role": "Admin",
+        "user_email": "sunil@gmail.com",
+        "user_password": "sunil123"
     }
 ]
 

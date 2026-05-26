@@ -3,7 +3,6 @@ from fastapi import Depends
 from Model import database
 from Schema import schema
 from typing import List
-from sqlalchemy import and_
 from sqlalchemy.orm import Session
 from Repository import risks
 from Scheme.oauth2 import get_current_user

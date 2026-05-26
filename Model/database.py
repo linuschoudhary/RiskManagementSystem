@@ -12,6 +12,6 @@ LocalSession = session
 def get_db():
     LocalSession = Session()
     try:
-        yield session
+        yield LocalSession
     finally:
         LocalSession.close()

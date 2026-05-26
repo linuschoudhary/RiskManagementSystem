@@ -3,8 +3,6 @@ from fastapi import HTTPException,status
 from sqlalchemy.orm import Session
 from fastapi.responses import JSONResponse
 
-
-
 def get_all(db:Session):
     try:
         risks =db.query(model.Risk).all()
@@ -21,22 +19,22 @@ def get_all(db:Session):
                 "risk_type" : risk.risk_type,
                 "created_by" : {
                     "user_id" : risk.created_by,
-                    "user_name" : risk.creator.user_name,
-                    "user_role" : risk.creator.user_role,
-                    "user_email": risk.creator.user_email
-                },
+                    "user_name" : risk.creator.user_name if risk.creator else None,
+                    "user_role" : risk.creator.user_role if risk.creator else None,
+                    "user_email": risk.creator.user_email if risk.creator else None
+                } if risk.created_by else None,
                 "risk_allocation" : {
                     "user_id" : risk.risk_allocation,
-                    "user_name" : risk.allocator.user_name,
-                    "user_role" : risk.allocator.user_role,
-                    "user_email": risk.allocator.user_email
-                },
+                    "user_name" : risk.allocator.user_name if risk.allocator else None,
+                    "user_role" : risk.allocator.user_role if risk.allocator else None,
+                    "user_email": risk.allocator.user_email if risk.allocator else None
+                } if risk.risk_allocation else None,
                 "assigned_to" : {
                     "user_id" : risk.assigned_to,
-                    "user_name" : risk.assignee.user_name,
-                    "user_role" : risk.assignee.user_role,
-                    "user_email": risk.assignee.user_email
-                },
+                    "user_name" : risk.assignee.user_name if risk.assignee else None,
+                    "user_role" : risk.assignee.user_role if risk.assignee else None,
+                    "user_email": risk.assignee.user_email if risk.assignee else None
+                } if risk.assigned_to else None,
                 "risk_category": risk.risk_category,
                 "due_date": risk.due_date
                 
@@ -60,22 +58,22 @@ def get_risks_by_id(db:Session,risk_id:int):
         "risk_type" : risk.risk_type,
         "created_by" : {
             "user_id" : risk.created_by,
-            "user_name" : risk.creator.user_name,
-            "user_role" : risk.creator.user_role,
-            "user_email": risk.creator.user_email
-        },
+            "user_name" : risk.creator.user_name if risk.creator else None,
+            "user_role" : risk.creator.user_role if risk.creator else None,
+            "user_email": risk.creator.user_email if risk.creator else None
+        } if risk.created_by else None,
         "risk_allocation" : {
             "user_id" : risk.risk_allocation,
-            "user_name" : risk.allocator.user_name,
-            "user_role" : risk.allocator.user_role,
-            "user_email": risk.allocator.user_email
-        },
+            "user_name" : risk.allocator.user_name if risk.allocator else None,
+            "user_role" : risk.allocator.user_role if risk.allocator else None,
+            "user_email": risk.allocator.user_email if risk.allocator else None
+        } if risk.risk_allocation else None,
         "assigned_to" : {
             "user_id" : risk.assigned_to,
-            "user_name" : risk.assignee.user_name,
-            "user_role" : risk.assignee.user_role,
-            "user_email": risk.assignee.user_email
-        },
+            "user_name" : risk.assignee.user_name if risk.assignee else None,
+            "user_role" : risk.assignee.user_role if risk.assignee else None,
+            "user_email": risk.assignee.user_email if risk.assignee else None
+        } if risk.assigned_to else None,
         "risk_category": risk.risk_category,
         "due_date": risk.due_date
     }

@@ -54,8 +54,8 @@ class RiskOutput(BaseModel):
     risk_type: str 
     risk_category : str 
     created_by : UserOutput
-    risk_allocation : UserOutput
-    assigned_to : UserOutput
+    risk_allocation : Optional[UserOutput] = None
+    assigned_to : Optional[UserOutput] = None
     due_date : str 
     
 

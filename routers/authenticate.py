@@ -4,7 +4,7 @@ from Schema import schema
 from sqlalchemy.orm import Session
 from Model import database,model
 from hashing import Hash
-from jwttoken import create_access_token
+from Scheme.jwttoken import create_access_token
 router = APIRouter(
     tags=['Authentication']
 )
@@ -24,5 +24,7 @@ def login(details: OAuth2PasswordRequestForm = Depends(),db: Session = Depends(d
             detail="Invalid Credentials"
         )
     
-    access_token = create_access_token(data = {"sub": user.user_email})
+    access_token = create_access_token(
+        data = {"sub": user.user_email,"role": user.user_role}
+        )
     return {"access_token": access_token,"token_type":"bearer"}

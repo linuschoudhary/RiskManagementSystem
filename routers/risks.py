@@ -6,6 +6,7 @@ from typing import List
 from sqlalchemy import and_
 from sqlalchemy.orm import Session
 from Repository import risks
+from Scheme.oauth2 import get_current_user
 
 get_db = database.get_db
 
@@ -17,22 +18,22 @@ router = APIRouter(
 
 # Risks
 @router.get("/",response_model=List[schema.RiskOutput])
-def showRisks(db: Session = Depends(get_db)):
+def showRisks(db: Session = Depends(get_db),current_user : schema.User = Depends(get_current_user)):
     return risks.get_all(db)
 
 
 @router.get("/{risk_id}")
-def showRiskByRiskID(risk_id: int,db: Session = Depends(get_db)):
+def showRiskByRiskID(risk_id: int,db: Session = Depends(get_db),current_user : schema.User = Depends(get_current_user)):
     return risks.get_risks_by_id(db,risk_id)
 
 @router.post("/add")
-def addRisk(details:schema.Risk,db : Session = Depends(get_db)):
+def addRisk(details:schema.Risk,db : Session = Depends(get_db),current_user : schema.User = Depends(get_current_user)):
     return risks.add_risks(db,details)
 
 @router.put("/update/{risk_id}",response_model=schema.RiskOutputUpdated)
-def updateRisk(risk_id: int,details: schema.RiskUpdate,db : Session = Depends(get_db)):
+def updateRisk(risk_id: int,details: schema.RiskUpdate,db : Session = Depends(get_db),current_user : schema.User = Depends(get_current_user)):
     return risks.update_risks(db,risk_id,details)
 
 @router.delete("/delete/{risk_id}")
-def deleteRisk(risk_id:int,db: Session = Depends(get_db)):
+def deleteRisk(risk_id:int,db: Session = Depends(get_db),current_user : schema.User = Depends(get_current_user)):
     return risks.delete_risk(db, risk_id)

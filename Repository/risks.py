@@ -21,21 +21,21 @@ def get_all(db:Session):
                 "risk_type" : risk.risk_type,
                 "created_by" : {
                     "user_id" : risk.created_by,
-                    "user_name" : risk.user.user_name,
-                    "user_role" : risk.user.user_role,
-                    "user_email": risk.user.user_email
+                    "user_name" : risk.creator.user_name,
+                    "user_role" : risk.creator.user_role,
+                    "user_email": risk.creator.user_email
                 },
                 "risk_allocation" : {
                     "user_id" : risk.risk_allocation,
-                    "user_name" : risk.user.user_name,
-                    "user_role" : risk.user.user_role,
-                    "user_email": risk.user.user_email
+                    "user_name" : risk.allocator.user_name,
+                    "user_role" : risk.allocator.user_role,
+                    "user_email": risk.allocator.user_email
                 },
                 "assigned_to" : {
                     "user_id" : risk.assigned_to,
-                    "user_name" : risk.user.user_name,
-                    "user_role" : risk.user.user_role,
-                    "user_email": risk.user.user_email
+                    "user_name" : risk.assignee.user_name,
+                    "user_role" : risk.assignee.user_role,
+                    "user_email": risk.assignee.user_email
                 },
                 "risk_category": risk.risk_category,
                 "due_date": risk.due_date
@@ -60,21 +60,21 @@ def get_risks_by_id(db:Session,risk_id:int):
         "risk_type" : risk.risk_type,
         "created_by" : {
             "user_id" : risk.created_by,
-            "user_name" : risk.user.user_name,
-            "user_role" : risk.user.user_role,
-            "user_email": risk.user.user_email
+            "user_name" : risk.creator.user_name,
+            "user_role" : risk.creator.user_role,
+            "user_email": risk.creator.user_email
         },
         "risk_allocation" : {
             "user_id" : risk.risk_allocation,
-            "user_name" : risk.user.user_name,
-            "user_role" : risk.user.user_role,
-            "user_email": risk.user.user_email
+            "user_name" : risk.allocator.user_name,
+            "user_role" : risk.allocator.user_role,
+            "user_email": risk.allocator.user_email
         },
         "assigned_to" : {
             "user_id" : risk.assigned_to,
-            "user_name" : risk.user.user_name,
-            "user_role" : risk.user.user_role,
-            "user_email": risk.user.user_email
+            "user_name" : risk.assignee.user_name,
+            "user_role" : risk.assignee.user_role,
+            "user_email": risk.assignee.user_email
         },
         "risk_category": risk.risk_category,
         "due_date": risk.due_date

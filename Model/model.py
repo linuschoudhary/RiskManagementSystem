@@ -13,7 +13,23 @@ class User(Base):
     user_email = Column(String)
     user_password = Column(String)
 
-    risks = relationship("Risk",back_populates="user")
+    assigned_risk = relationship(
+        "Risk",
+        foreign_keys="Risk.assigned_to",
+        back_populates="assignee"
+    )
+
+    allocated_risk = relationship(
+        "Risk",
+        foreign_keys="Risk.risk_allocation",
+        back_populates= "allocator"
+    )
+
+    created_risk = relationship(
+        "Risk",
+        foreign_keys="Risk.created_by",
+        back_populates= "creator"
+    )
 
 class Risk(Base):
     __tablename__ = "risks"
@@ -25,12 +41,26 @@ class Risk(Base):
     risk_status = Column(String)
     risk_type = Column(String)
     risk_category = Column(String)
-    created_by = Column(Integer)
-    risk_allocation = Column(Integer)
+    created_by = Column(Integer,ForeignKey("users.user_id"))
+    risk_allocation = Column(Integer,ForeignKey("users.user_id"))
     assigned_to = Column(Integer, ForeignKey("users.user_id"))
     due_date = Column(String)
 
-    user = relationship("User", back_populates= "risks")
+    assignee = relationship(
+        "User", 
+        foreign_keys= [assigned_to],
+        back_populates= "assigned_risk"
+    )
+    allocator = relationship(
+        "User",
+        foreign_keys= [risk_allocation],
+        back_populates="allocated_risk"
+    )
+    creator = relationship(
+        "User",
+        foreign_keys= [created_by],
+        back_populates= "created_risk"
+    )
 
 
 

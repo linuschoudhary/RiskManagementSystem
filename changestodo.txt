@@ -1,3 +1,2 @@
 1) When Updating password for user, hashing is not applied.
 2) Add a new function in users to show all the risks associated to a single user
-3) When searcing a risk which do not have any user associated, will give error.

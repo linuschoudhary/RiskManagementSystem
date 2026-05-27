@@ -128,10 +128,10 @@ default_users = [
         "user_password": "priyanjali123"
     },
     {
-        "user_name": "Prateeksha Khichi",
+        "user_name": "Harshita Sharma",
         "user_role": "Admin",
-        "user_email": "prateeksha@gmail.com",
-        "user_password": "prateeksha123"
+        "user_email": "Harshita@gmail.com",
+        "user_password": "harshita123"
     },
     {
         "user_name": "Sunil Choudhary",
